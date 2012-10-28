@@ -5,7 +5,7 @@ Plugin Name: Image slider with description
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Description: Image slider with description WordPress plugin is a Jquery based image slideshow script that incorporates some of your most requested features all rolled into one. Not only image this slideshow have images, title and description. We have option to enable/disable description in the slideshow.
 Author: Gopi.R
-Version: 5.0
+Version: 6.0
 Author URI: http://www.gopiplus.com/work/
 Donate link: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
@@ -202,7 +202,7 @@ function ImgSlider_admin_options()
 
 	echo '</form>';
 	echo '<br>Note: Use the short code to add the gallery in to the posts and pages.<br />';
-	echo '<br>Check official website <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">www.gopiplus.com</a> for live demo and more info.<br>';
+	echo '<br>Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">click here</a><br>';
 	echo '</div><br>';
 }
 
@@ -246,6 +246,13 @@ function ImgSlider_Group($number)
 	return $group;
 }
 
+function ImgSlider_Fun( $setting, $group ) 
+{
+	$arr = array();
+	$arr["setting"]=$setting;
+	$arr["group"]=$group;
+	echo ImgSlider_shortcode( $arr );
+}
 
 add_shortcode( 'image-slider-desc', 'ImgSlider_shortcode' );
 

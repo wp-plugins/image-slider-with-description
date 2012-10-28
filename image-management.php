@@ -218,7 +218,7 @@
         <?php } ?>
       </table><br />
 	  Note: Use the short code to add the gallery in to the posts and pages.
-     <br /><br />  Check official website <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">www.gopiplus.com</a> for live demo and more info.
+     <br /><br />  Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">click here</a>
 </form>
   </div>
 </div>

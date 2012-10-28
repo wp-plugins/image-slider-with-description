@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slide
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
 Requires at least: 3.0
-Tested up to: 3.4.1
-Stable tag: 5.0
+Tested up to: 3.4.2
+Stable tag: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -88,6 +88,11 @@ Slight change in the short code, Please find the new short code for your gallery
 
 New demo link
 
+= 6.0 =
+
+Now option to load the slider directly in the theme file ( i.e PHP file) 
+Tested up to 3.4.2
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -110,3 +115,8 @@ Slight change in the short code, Please find the new short code for your gallery
 = 5.0 =
 
 New demo link
+
+= 6.0 =
+
+Now option to load the slider directly in the theme file ( i.e PHP file) 
+Tested up to 3.4.2
