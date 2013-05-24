@@ -5,7 +5,7 @@ Plugin Name: Image slider with description
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Description: Image slider with description WordPress plugin is a Jquery based image slideshow script that incorporates some of your most requested features all rolled into one. Not only image this slideshow have images, title and description. We have option to enable/disable description in the slideshow.
 Author: Gopi.R
-Version: 6.1
+Version: 7.0
 Author URI: http://www.gopiplus.com/work/
 Donate link: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
@@ -15,6 +15,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 global $wpdb, $wp_version;
 define("WP_ImgSlider_TABLE", $wpdb->prefix . "ImgSlider_plugin");
+define('WP_ImgSlider_UNIQUE_NAME', 'ImgSlider');
+define('WP_ImgSlider_TITLE', 'Image slider with description');
+define('WP_ImgSlider_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">click here</a>');
+define('WP_ImgSlider_FAV', 'http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/');
 
 function ImgSlider_install() 
 {
@@ -61,6 +65,7 @@ function ImgSlider_admin_options()
 {
 	global $wpdb;
 	echo "<div class='wrap'>";
+	echo '<div id="icon-edit" class="icon32 icon32-posts-post"><br></div>';
 	echo "<h2>"; 
 	echo "Image slider with description";
 	echo "</h2>";
@@ -112,7 +117,7 @@ function ImgSlider_admin_options()
 	
 	echo '<table width="80%" border="0" cellspacing="0" cellpadding="0">';
 	
-	echo '<tr><td style="width:50%;"><strong>Setting 1</strong></td><td style="width:50%;"><strong>Setting 2</strong></td></tr>';
+	echo '<tr><td style="width:50%;"><h3>Setting 1</h3></td><td style="width:50%;"><h3>Setting 2</h3></td></tr>';
 	echo '<tr><td style="width:50%;">';
 	echo '<p>Slider Width :<br><input  style="width: 150px;" maxlength="3" type="text" value="';
 	echo $ImgSlider_sliderWidth . '" name="ImgSlider_sliderWidth" id="ImgSlider_sliderWidth" /> (only number)</p>';
@@ -201,8 +206,8 @@ function ImgSlider_admin_options()
 	echo '<input name="ImgSlider_submit" id="ImgSlider_submit" class="button-primary" value="Save Both Image slider Setting" type="submit" />';
 
 	echo '</form>';
-	echo '<br>Note: Use the short code to add the gallery in to the posts and pages.<br />';
-	echo '<br>Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">click here</a><br>';
+	echo '<br /><p class="description">Note: Use the short code to add the gallery in to the posts and pages.</p>';
+	echo '<p class="description">' . WP_ImgSlider_LINK . '</p>';
 	echo '</div><br>';
 }
 
@@ -457,16 +462,28 @@ return $Slider;
 
 function ImgSlider_deactivation() 
 {
-
+	// No action required.
 }
 
 function ImgSlider_image_management() 
 {
 	global $wpdb;
-	include_once("image-management.php");
+	$current_page = isset($_GET['sp']) ? $_GET['sp'] : '';
+	switch($current_page)
+	{
+		case 'edit':
+			include('pages/image-management-edit.php');
+			break;
+		case 'add':
+			include('pages/image-management-add.php');
+			break;
+		default:
+			include('pages/image-management-show.php');
+			break;
+	}
 }
 
-function FadeIn_add_javascript_files() 
+function ImgSlider_add_javascript_files() 
 {
 	if (!is_admin())
 	{
@@ -475,7 +492,7 @@ function FadeIn_add_javascript_files()
 	}	
 }
 
-function add_admin_menu_option() 
+function ImgSlider_add_admin_menu_option() 
 {
 	if (is_admin()) 
 	{
@@ -485,8 +502,8 @@ function add_admin_menu_option()
 	}
 }
 
-add_action('admin_menu', 'add_admin_menu_option');
-add_action('wp_enqueue_scripts', 'FadeIn_add_javascript_files');
+add_action('admin_menu', 'ImgSlider_add_admin_menu_option');
+add_action('wp_enqueue_scripts', 'ImgSlider_add_javascript_files');
 register_activation_hook(__FILE__, 'ImgSlider_install');
 register_deactivation_hook(__FILE__, 'ImgSlider_deactivation');
 ?>

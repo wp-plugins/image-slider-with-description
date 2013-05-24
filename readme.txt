@@ -4,9 +4,9 @@ Donate link: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slid
 Author URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
-Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 6.1
+Requires at least: 3.4
+Tested up to: 3.6
+Stable tag: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -99,6 +99,11 @@ Tested up to 3.5
 Avoid registering the alternate jQuery.
 From this version we are using existing wordpress jQuery.
 
+= 7.0 =
+
+Tested up to 3.6
+Fixed vulnerability security issue.
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -132,3 +137,8 @@ Tested up to 3.4.2
 Tested up to 3.5
 Avoid registering the alternate jQuery.
 From this version we are using existing wordpress jQuery.
+
+= 7.0 =
+
+Tested up to 3.6
+Fixed vulnerability security issue.
