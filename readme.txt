@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slide
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
 Requires at least: 3.4
-Tested up to: 3.6
-Stable tag: 7.0
+Tested up to: 3.8
+Stable tag: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -63,7 +63,9 @@ Q4. Can you explain the short code?
 
 == Screenshots ==
 
-1. Front end http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
+1. Admin http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
+
+1. Front End http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 
 == Changelog ==
 
@@ -104,6 +106,13 @@ From this version we are using existing wordpress jQuery.
 Tested up to 3.6
 Fixed vulnerability security issue.
 
+= 7.1 =
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (imgslider.po) available in the languages folder. Translators Welcome.
+3. Supports network multisite website (Manual table creation required).
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -142,3 +151,10 @@ From this version we are using existing wordpress jQuery.
 
 Tested up to 3.6
 Fixed vulnerability security issue.
+
+= 7.1 =
+
+1. Tested up to 3.8
+2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
+Plugin *.po file (imgslider.po) available in the languages folder. Translators Welcome.
+3. Supports network multisite website (Manual table creation required).

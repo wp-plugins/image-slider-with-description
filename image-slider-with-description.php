@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: Image slider with description
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Description: Image slider with description WordPress plugin is a Jquery based image slideshow script that incorporates some of your most requested features all rolled into one. Not only image this slideshow have images, title and description. We have option to enable/disable description in the slideshow.
 Author: Gopi.R
-Version: 7.0
+Version: 7.1
 Author URI: http://www.gopiplus.com/work/
 Donate link: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
@@ -15,10 +14,22 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 global $wpdb, $wp_version;
 define("WP_ImgSlider_TABLE", $wpdb->prefix . "ImgSlider_plugin");
-define('WP_ImgSlider_UNIQUE_NAME', 'ImgSlider');
-define('WP_ImgSlider_TITLE', 'Image slider with description');
-define('WP_ImgSlider_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">click here</a>');
+//define('WP_ImgSlider_UNIQUE_NAME', 'ImgSlider');
+//define('WP_ImgSlider_TITLE', 'Image slider with description');
+//define('WP_ImgSlider_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">click here</a>');
 define('WP_ImgSlider_FAV', 'http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/');
+
+if ( ! defined( 'WP_ImgSlider_BASENAME' ) )
+	define( 'WP_ImgSlider_BASENAME', plugin_basename( __FILE__ ) );
+	
+if ( ! defined( 'WP_ImgSlider_PLUGIN_NAME' ) )
+	define( 'WP_ImgSlider_PLUGIN_NAME', trim( dirname( WP_ImgSlider_BASENAME ), '/' ) );
+	
+if ( ! defined( 'WP_ImgSlider_PLUGIN_URL' ) )
+	define( 'WP_ImgSlider_PLUGIN_URL', WP_PLUGIN_URL . '/' . WP_ImgSlider_PLUGIN_NAME );
+	
+if ( ! defined( 'WP_ImgSlider_ADMIN_URL' ) )
+	define( 'WP_ImgSlider_ADMIN_URL', get_option('siteurl') . '/wp-admin/admin.php?page=ImgSlider_image_management' );
 
 function ImgSlider_install() 
 {
@@ -39,7 +50,7 @@ function ImgSlider_install()
 		$sSql = $sSql . "`ImgSlider_extra2` VARCHAR( 100 ) NOT NULL ,";
 		$sSql = $sSql . "`ImgSlider_date` datetime NOT NULL default '0000-00-00 00:00:00' ,";
 		$sSql = $sSql . "PRIMARY KEY ( `ImgSlider_id` )";
-		$sSql = $sSql . ")";
+		$sSql = $sSql . ") ENGINE=MyISAM  DEFAULT CHARSET=utf8;";
 		$wpdb->query($sSql);
 		
 		$IsSql = "INSERT INTO `". WP_ImgSlider_TABLE . "` (`ImgSlider_path`, `ImgSlider_link`, `ImgSlider_target` , `ImgSlider_title` , `ImgSlider_desc` , `ImgSlider_order` , `ImgSlider_status` , `ImgSlider_type` , `ImgSlider_date`)"; 
@@ -67,10 +78,10 @@ function ImgSlider_admin_options()
 	echo "<div class='wrap'>";
 	echo '<div id="icon-edit" class="icon32 icon32-posts-post"><br></div>';
 	echo "<h2>"; 
-	echo "Image slider with description";
+	_e('Image slider with description', 'imgslider');
 	echo "</h2>";
 	
-	if (@$_POST['ImgSlider_submit']) 
+	if (isset($_POST['ImgSlider_submit'])) 
 	{
 		$a = stripslashes($_POST['ImgSlider_sliderWidth']);
 		$b = stripslashes($_POST['ImgSlider_borderWidth']);
@@ -117,97 +128,102 @@ function ImgSlider_admin_options()
 	
 	echo '<table width="80%" border="0" cellspacing="0" cellpadding="0">';
 	
-	echo '<tr><td style="width:50%;"><h3>Setting 1</h3></td><td style="width:50%;"><h3>Setting 2</h3></td></tr>';
+	echo '<tr><td style="width:50%;"><h3>'.__( 'Setting 1', 'imgslider' ).'</h3></td><td style="width:50%;"><h3>'.__( 'Setting 2', 'imgslider' ).'</h3></td></tr>';
 	echo '<tr><td style="width:50%;">';
-	echo '<p>Slider Width :<br><input  style="width: 150px;" maxlength="3" type="text" value="';
-	echo $ImgSlider_sliderWidth . '" name="ImgSlider_sliderWidth" id="ImgSlider_sliderWidth" /> (only number)</p>';
+	echo '<p>'.__( 'Slider Width :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="3" type="text" value="';
+	echo $ImgSlider_sliderWidth . '" name="ImgSlider_sliderWidth" id="ImgSlider_sliderWidth" /> '.__( '(only number)', 'imgslider' ).'</p>';
 
-	echo '<p>Border Width :<br><input  style="width: 150px;" maxlength="2" type="text" value="';
-	echo $ImgSlider_borderWidth . '" name="ImgSlider_borderWidth" id="ImgSlider_borderWidth" /> (only number)</p>';
+	echo '<p>'.__( 'Border Width :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="2" type="text" value="';
+	echo $ImgSlider_borderWidth . '" name="ImgSlider_borderWidth" id="ImgSlider_borderWidth" /> '.__( '(only number)', 'imgslider' ).'</p>';
 
-	echo '<p>Slider Height :<br><input  style="width: 150px;" type="text" maxlength="3" value="';
-	echo $ImgSlider_sliderHeight . '" name="ImgSlider_sliderHeight" id="ImgSlider_sliderHeight" /> (only number)</p>';
+	echo '<p>'.__( 'Slider Height :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="3" value="';
+	echo $ImgSlider_sliderHeight . '" name="ImgSlider_sliderHeight" id="ImgSlider_sliderHeight" /> '.__( '(only number)', 'imgslider' ).'</p>';
 
-	echo '<p>Background Color :<br><input  style="width: 150px;" type="text" maxlength="6" value="';
-	echo $ImgSlider_backgroundColor . '" name="ImgSlider_backgroundColor" id="ImgSlider_backgroundColor" /> (color code without #)</p>';
+	echo '<p>'.__( 'Background Color :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="6" value="';
+	echo $ImgSlider_backgroundColor . '" name="ImgSlider_backgroundColor" id="ImgSlider_backgroundColor" /> '.__( '(color code without #)', 'imgslider' ).'</p>';
 	
-	echo '<p>Description Text Color :<br><input  style="width: 150px;" maxlength="6" type="text" value="';
-	echo $ImgSlider_descColor . '" name="ImgSlider_descColor" id="ImgSlider_descColor" /> (color code without #)</p>';
+	echo '<p>'.__( 'Description Text Color :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="6" type="text" value="';
+	echo $ImgSlider_descColor . '" name="ImgSlider_descColor" id="ImgSlider_descColor" /> '.__( '(color code without #)', 'imgslider' ).'</p>';
 	
-	echo '<p>Show Button :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Button :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showButtons . '" name="ImgSlider_showButtons" id="ImgSlider_showButtons" /> (0/1)</p>';
 	
-	echo '<p>Show Name :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Name :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showNames . '" name="ImgSlider_showNames" id="ImgSlider_showNames" /> (0/1)</p>';
 	
-	echo '<p>Show Description :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Description :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showDesc . '" name="ImgSlider_showDesc" id="ImgSlider_showDesc" /> (0/1)</p>';
 	
-	echo '<p>Show Link :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Link :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showLink . '" name="ImgSlider_showLink" id="ImgSlider_showLink" /> (0/1)</p>';
 	
 	//echo '<p>Link New Window :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	//echo $ImgSlider_linkNewWindow . '" name="ImgSlider_linkNewWindow" id="ImgSlider_linkNewWindow" /> (0/1)</p>';
 	
-	echo '<p>Button Color :<br><input  style="width: 150px;" type="text" maxlength="8" value="';
+	echo '<p>'.__( 'Button Color :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="8" value="';
 	echo $ImgSlider_buttonColor . '" name="ImgSlider_buttonColor" id="ImgSlider_buttonColor" /> (green/yellow/brick/pink/purple/white)</p>';
 	
-	echo '<p>Plugin Animation :<br><input  style="width: 150px;" maxlength="5" type="text" value="';
+	echo '<p>'.__( 'Plugin Animation :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="5" type="text" value="';
 	echo $ImgSlider_animation . '" name="ImgSlider_animation" id="ImgSlider_animation" /> (slide/fade)</p>';
 	
-	echo '<p>Fade Speed :<br><input  style="width: 150px;" maxlength="3" type="text" value="';
-	echo $ImgSlider_fadeSpeed . '" name="ImgSlider_fadeSpeed" id="ImgSlider_fadeSpeed" /> (only number)</p>';
+	echo '<p>'.__( 'Fade Speed :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="3" type="text" value="';
+	echo $ImgSlider_fadeSpeed . '" name="ImgSlider_fadeSpeed" id="ImgSlider_fadeSpeed" /> '.__( '(only number)', 'imgslider' ).'</p>';
 	echo '</td>';
 	
 	echo '<td style="width:50%;">';
-	echo '<p>Slider Width :<br><input  style="width: 150px;" maxlength="3" type="text" value="';
-	echo $ImgSlider_sliderWidth_1 . '" name="ImgSlider_sliderWidth_1" id="ImgSlider_sliderWidth_1" /> (only number)</p>';
+	echo '<p>'.__( 'Slider Width :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="3" type="text" value="';
+	echo $ImgSlider_sliderWidth_1 . '" name="ImgSlider_sliderWidth_1" id="ImgSlider_sliderWidth_1" /> '.__( '(only number)', 'imgslider' ).'</p>';
 
-	echo '<p>Border Width :<br><input  style="width: 150px;" maxlength="2" type="text" value="';
-	echo $ImgSlider_borderWidth_1 . '" name="ImgSlider_borderWidth_1" id="ImgSlider_borderWidth_1" /> (only number)</p>';
+	echo '<p>'.__( 'Border Width :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="2" type="text" value="';
+	echo $ImgSlider_borderWidth_1 . '" name="ImgSlider_borderWidth_1" id="ImgSlider_borderWidth_1" /> '.__( '(only number)', 'imgslider' ).'</p>';
 
-	echo '<p>Slider Height :<br><input  style="width: 150px;" type="text" maxlength="3" value="';
-	echo $ImgSlider_sliderHeight_1 . '" name="ImgSlider_sliderHeight_1" id="ImgSlider_sliderHeight_1" /> (only number)</p>';
+	echo '<p>'.__( 'Slider Height :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="3" value="';
+	echo $ImgSlider_sliderHeight_1 . '" name="ImgSlider_sliderHeight_1" id="ImgSlider_sliderHeight_1" /> '.__( '(only number)', 'imgslider' ).'</p>';
 
-	echo '<p>Background Color :<br><input  style="width: 150px;" type="text" maxlength="6" value="';
-	echo $ImgSlider_backgroundColor_1 . '" name="ImgSlider_backgroundColor_1" id="ImgSlider_backgroundColor_1" /> (color code without #)</p>';
+	echo '<p>'.__( 'Background Color :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="6" value="';
+	echo $ImgSlider_backgroundColor_1 . '" name="ImgSlider_backgroundColor_1" id="ImgSlider_backgroundColor_1" /> '.__( '(color code without #)', 'imgslider' ).'</p>';
 	
-	echo '<p>Description Text Color :<br><input  style="width: 150px;" type="text" maxlength="6" value="';
-	echo $ImgSlider_descColor_1 . '" name="ImgSlider_descColor_1" id="ImgSlider_descColor_1" /> (color code without #)</p>';
+	echo '<p>'.__( 'Description Text Color :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="6" value="';
+	echo $ImgSlider_descColor_1 . '" name="ImgSlider_descColor_1" id="ImgSlider_descColor_1" /> '.__( '(color code without #)', 'imgslider' ).'</p>';
 	
-	echo '<p>Show Button :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Button :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showButtons_1 . '" name="ImgSlider_showButtons_1" id="ImgSlider_showButtons_1" /> (0/1)</p>';
 	
-	echo '<p>Show Name :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Name :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showNames_1 . '" name="ImgSlider_showNames_1" id="ImgSlider_showNames_1" /> (0/1)</p>';
 	
-	echo '<p>Show Description :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Description :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showDesc_1 . '" name="ImgSlider_showDesc_1" id="ImgSlider_showDesc_1" /> (0/1)</p>';
 	
-	echo '<p>Show Link :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
+	echo '<p>'.__( 'Show Link :', 'imgslider' ).'<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	echo $ImgSlider_showLink_1 . '" name="ImgSlider_showLink_1" id="ImgSlider_showLink_1" /> (0/1)</p>';
 	
 	//echo '<p>Link New Window :<br><input  style="width: 150px;" maxlength="1" type="text" value="';
 	//echo $ImgSlider_linkNewWindow_1 . '" name="ImgSlider_linkNewWindow_1" id="ImgSlider_linkNewWindow_1" /> (0/1)</p>';
 	
-	echo '<p>Button Color :<br><input  style="width: 150px;" type="text" maxlength="8" value="';
+	echo '<p>'.__( 'Button Color :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="8" value="';
 	echo $ImgSlider_buttonColor_1 . '" name="ImgSlider_buttonColor_1" id="ImgSlider_buttonColor_1" /> (green/yellow/brick/pink/purple/white)</p>';
 	
-	echo '<p>Plugin Animation :<br><input  style="width: 150px;" type="text" maxlength="5" value="';
+	echo '<p>'.__( 'Plugin Animation :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="5" value="';
 	echo $ImgSlider_animation_1 . '" name="ImgSlider_animation_1" id="ImgSlider_animation_1" /> (slide/fade)</p>';
 	
-	echo '<p>Fade Speed :<br><input  style="width: 150px;" type="text" maxlength="3" value="';
-	echo $ImgSlider_fadeSpeed_1 . '" name="ImgSlider_fadeSpeed_1" id="ImgSlider_fadeSpeed_1" /> (only number)</p>';
+	echo '<p>'.__( 'Fade Speed :', 'imgslider' ).'<br><input  style="width: 150px;" type="text" maxlength="3" value="';
+	echo $ImgSlider_fadeSpeed_1 . '" name="ImgSlider_fadeSpeed_1" id="ImgSlider_fadeSpeed_1" /> '.__( '(only number)', 'imgslider' ).'</p>';
 	echo '</td></tr>';
 	
 	echo '</table>';
-	echo '*Note : 1 = Enable, 0 = Disable<br><br>';
+	echo '*'.__( 'Note : 1 = Enable, 0 = Disable', 'imgslider' ).'<br><br>';
 	
-	echo '<input name="ImgSlider_submit" id="ImgSlider_submit" class="button-primary" value="Save Both Image slider Setting" type="submit" />';
+	echo '<input name="ImgSlider_submit" id="ImgSlider_submit" class="button-primary" value="'.__( 'Save Both Image slider Setting', 'imgslider' ).'" type="submit" />';
 
 	echo '</form>';
-	echo '<br /><p class="description">Note: Use the short code to add the gallery in to the posts and pages.</p>';
-	echo '<p class="description">' . WP_ImgSlider_LINK . '</p>';
+	echo '<br /><p class="description">'.__( 'Note: Use the short code to add the gallery in to the posts and pages.', 'imgslider' ).'</p>';
+	?>
+	<p class="description">
+	<?php _e('Check official website for more information', 'imgslider'); ?>
+	<a target="_blank" href="<?php echo WP_ImgSlider_FAV; ?>"><?php _e('click here', 'imgslider'); ?></a>
+	</p>
+	<?php
 	echo '</div><br>';
 }
 
@@ -455,7 +471,7 @@ $Slider = $Slider . '<div id="header_hotslider">';
 	}
 	else
 	{
-		$Slider ="[image-slider-desc Please check the short code, may be no image available for this group]";
+		$Slider = __( 'Please check the short code, may be no image available for this group', 'imgslider' );
 	}
 return $Slider;
 }
@@ -488,7 +504,7 @@ function ImgSlider_add_javascript_files()
 	if (!is_admin())
 	{
 		wp_enqueue_script('jquery');
-		wp_enqueue_script( 'ImgSlider.scripts', get_option('siteurl').'/wp-content/plugins/image-slider-with-description/js/scripts.js');
+		wp_enqueue_script( 'imgslider.scripts', get_option('siteurl').'/wp-content/plugins/image-slider-with-description/js/scripts.js');
 	}	
 }
 
@@ -496,12 +512,20 @@ function ImgSlider_add_admin_menu_option()
 {
 	if (is_admin()) 
 	{
-		add_menu_page( __( 'Image Slider', 'ImgSlider' ), __( 'Image Slider', 'ImgSlider' ), 'administrator', 'ImgSlider', 'ImgSlider_admin_options' );
-		add_submenu_page( 'ImgSlider', __( 'Slider Setting', 'ImgSlider' ), __( 'Slider Setting', 'ImgSlider' ),'administrator', 'ImgSlider', 'ImgSlider_admin_options' );
-		add_submenu_page( 'ImgSlider', __( 'Image Management', 'ImgSlider' ), __( 'Image Management', 'ImgSlider' ),'administrator', 'ImgSlider_image_management', 'ImgSlider_image_management' );
+		add_menu_page( __( 'Image Slider', 'imgslider' ), __( 'Image Slider', 'imgslider' ), 'administrator', 'ImgSlider', 'ImgSlider_admin_options' );
+		add_submenu_page( 'ImgSlider', __( 'Slider Setting', 'imgslider' ), 
+							__( 'Slider Setting', 'imgslider' ),'administrator', 'ImgSlider', 'ImgSlider_admin_options' );
+		add_submenu_page( 'ImgSlider', __( 'Image Management', 'imgslider' ), 
+							__( 'Image Management', 'imgslider' ),'administrator', 'ImgSlider_image_management', 'ImgSlider_image_management' );
 	}
 }
 
+function ImgSlider_textdomain() 
+{
+	  load_plugin_textdomain( 'imgslider', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+
+add_action('plugins_loaded', 'ImgSlider_textdomain');
 add_action('admin_menu', 'ImgSlider_add_admin_menu_option');
 add_action('wp_enqueue_scripts', 'ImgSlider_add_javascript_files');
 register_activation_hook(__FILE__, 'ImgSlider_install');

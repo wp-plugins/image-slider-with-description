@@ -13,7 +13,7 @@ $result = $wpdb->get_var($sSql);
 
 if ($result != '1')
 {
-	?><div class="error fade"><p><strong>Oops, selected details doesn't exist.</strong></p></div><?php
+	?><div class="error fade"><p><strong><?php _e('Oops, selected details doesnt exist.', 'imgslider'); ?></strong></p></div><?php
 }
 else
 {
@@ -53,14 +53,14 @@ if (isset($_POST['ImgSlider_form_submit']) && $_POST['ImgSlider_form_submit'] ==
 	$form['ImgSlider_path'] = isset($_POST['ImgSlider_path']) ? $_POST['ImgSlider_path'] : '';
 	if ($form['ImgSlider_path'] == '')
 	{
-		$ImgSlider_errors[] = __('Please enter the image path.', WP_ImgSlider_UNIQUE_NAME);
+		$ImgSlider_errors[] = __('Please enter the image path.', 'imgslider');
 		$ImgSlider_error_found = TRUE;
 	}
 
 	$form['ImgSlider_link'] = isset($_POST['ImgSlider_link']) ? $_POST['ImgSlider_link'] : '';
 	if ($form['ImgSlider_link'] == '')
 	{
-		$ImgSlider_errors[] = __('Please enter the target link.', WP_ImgSlider_UNIQUE_NAME);
+		$ImgSlider_errors[] = __('Please enter the target link.', 'imgslider');
 		$ImgSlider_error_found = TRUE;
 	}
 	
@@ -69,7 +69,7 @@ if (isset($_POST['ImgSlider_form_submit']) && $_POST['ImgSlider_form_submit'] ==
 	$form['ImgSlider_title'] = isset($_POST['ImgSlider_title']) ? $_POST['ImgSlider_title'] : '';
 	if ($form['ImgSlider_title'] == '')
 	{
-		$ImgSlider_errors[] = __('Please enter the image title.', WP_ImgSlider_UNIQUE_NAME);
+		$ImgSlider_errors[] = __('Please enter the image title.', 'imgslider');
 		$ImgSlider_error_found = TRUE;
 	}
 	
@@ -97,7 +97,7 @@ if (isset($_POST['ImgSlider_form_submit']) && $_POST['ImgSlider_form_submit'] ==
 			);
 		$wpdb->query($sSql);
 		
-		$ImgSlider_success = __('Image details was successfully updated.', WP_ImgSlider_UNIQUE_NAME);
+		$ImgSlider_success = __('Image details was successfully updated.', 'imgslider');
 	}
 }
 
@@ -109,7 +109,7 @@ if ($ImgSlider_error_found == TRUE && isset($ImgSlider_errors[0]) == TRUE)
   </div>
   <?php
 }
-if ($ltw_tes_error_found == FALSE && strlen($ImgSlider_success) > 0)
+if ($ImgSlider_error_found == FALSE && strlen($ImgSlider_success) > 0)
 {
 ?>
   <div class="updated fade">
@@ -118,33 +118,33 @@ if ($ltw_tes_error_found == FALSE && strlen($ImgSlider_success) > 0)
   <?php
 }
 ?>
-<script language="JavaScript" src="<?php echo get_option('siteurl'); ?>/wp-content/plugins/image-slider-with-description/pages/setting.js"></script>
+<script language="JavaScript" src="<?php echo WP_ImgSlider_PLUGIN_URL; ?>/pages/setting.js"></script>
 <div class="form-wrap">
 	<div id="icon-edit" class="icon32 icon32-posts-post"><br></div>
-	<h2><?php echo WP_ImgSlider_TITLE ?></h2>
+	<h2><?php _e('Image slider with description', 'imgslider'); ?></h2>
 	<form name="ImgSlider_form" method="post" action="#" onsubmit="return ImgSlider_submit()"  >
-      <h3>Edit image details</h3>
-      <label for="tag-image">Enter image path</label>
-      <input name="ImgSlider_path" type="text" id="ImgSlider_path" value="<?php echo $form['ImgSlider_path']; ?>" size="125" />
-      <p>Where is the picture located on the internet</p>
-      <label for="tag-link">Enter target link</label>
-      <input name="ImgSlider_link" type="text" id="ImgSlider_link" value="<?php echo $form['ImgSlider_link']; ?>" size="125" />
-      <p>When someone clicks on the picture, where do you want to send them</p>
-      <label for="tag-target">Enter target option</label>
+      <h3><?php _e('Edit image details', 'imgslider'); ?></h3>
+      <label for="tag-image"><?php _e('Enter image path', 'imgslider'); ?></label>
+      <input name="ImgSlider_path" type="text" id="ImgSlider_path" value="<?php echo $form['ImgSlider_path']; ?>" size="100" />
+      <p><?php _e('Where is the picture located on the internet', 'imgslider'); ?></p>
+      <label for="tag-link"><?php _e('Enter target link', 'imgslider'); ?></label>
+      <input name="ImgSlider_link" type="text" id="ImgSlider_link" value="<?php echo $form['ImgSlider_link']; ?>" size="100" />
+      <p><?php _e('When someone clicks on the picture, where do you want to send them', 'imgslider'); ?></p>
+      <label for="tag-target"><?php _e('Enter target option', 'imgslider'); ?></label>
       <select name="ImgSlider_target" id="ImgSlider_target">
         <option value='_blank' <?php if($form['ImgSlider_target']=='_blank') { echo 'selected' ; } ?>>_blank</option>
         <option value='_parent' <?php if($form['ImgSlider_target']=='_parent') { echo 'selected' ; } ?>>_parent</option>
         <option value='_self' <?php if($form['ImgSlider_target']=='_self') { echo 'selected' ; } ?>>_self</option>
         <option value='_new' <?php if($form['ImgSlider_target']=='_new') { echo 'selected' ; } ?>>_new</option>
       </select>
-      <p>Do you want to open link in new window?</p>
-      <label for="tag-title">Enter image title</label>
-      <input name="ImgSlider_title" type="text" id="ImgSlider_title" value="<?php echo $form['ImgSlider_title']; ?>" size="125" />
-      <p>Enter the image title. The title will display on the image within the slideshow.</p>
-      <label for="tag-desc">Enter image description</label>
-      <input name="ImgSlider_desc" type="text" id="ImgSlider_desc" value="<?php echo $form['ImgSlider_desc']; ?>" size="125" />
-      <p>Enter image description</p>
-      <label for="tag-select-gallery-group">Select gallery group</label>
+      <p><?php _e('Do you want to open link in new window?', 'imgslider'); ?></p>
+      <label for="tag-title"><?php _e('Enter image title', 'imgslider'); ?></label>
+      <input name="ImgSlider_title" type="text" id="ImgSlider_title" value="<?php echo $form['ImgSlider_title']; ?>" size="100" />
+      <p><?php _e('Enter the image title. The title will display on the image within the slideshow.', 'imgslider'); ?></p>
+      <label for="tag-desc"><?php _e('Enter image description', 'imgslider'); ?></label>
+      <input name="ImgSlider_desc" type="text" id="ImgSlider_desc" value="<?php echo $form['ImgSlider_desc']; ?>" size="100" />
+      <p><?php _e('Enter image description', 'imgslider'); ?></p>
+      <label for="tag-select-gallery-group"><?php _e('Select gallery group', 'imgslider'); ?></label>
       <select name="ImgSlider_type" id="ImgSlider_type">
         <option value='GROUP1' <?php if($form['ImgSlider_type']=='GROUP1') { echo 'selected' ; } ?>>Group1</option>
         <option value='GROUP2' <?php if($form['ImgSlider_type']=='GROUP2') { echo 'selected' ; } ?>>Group2</option>
@@ -157,25 +157,27 @@ if ($ltw_tes_error_found == FALSE && strlen($ImgSlider_success) > 0)
         <option value='GROUP9' <?php if($form['ImgSlider_type']=='GROUP9') { echo 'selected' ; } ?>>Group9</option>
         <option value='GROUP0' <?php if($form['ImgSlider_type']=='GROUP0') { echo 'selected' ; } ?>>Group0</option>
       </select>
-      <p>This is to group the images. Select your slideshow group. </p>
-      <label for="tag-display-status">Display status</label>
+      <p><?php _e('This is to group the images. Select your slideshow group.', 'imgslider'); ?></p>
+      <label for="tag-display-status"><?php _e('Display status', 'imgslider'); ?></label>
       <select name="ImgSlider_status" id="ImgSlider_status">
         <option value='YES' <?php if($form['ImgSlider_status']=='YES') { echo 'selected' ; } ?>>Yes</option>
         <option value='NO' <?php if($form['ImgSlider_status']=='NO') { echo 'selected' ; } ?>>No</option>
       </select>
-      <p>Do you want the picture to show in your galler?</p>
-      <label for="tag-display-order">Display order</label>
+      <p><?php _e('Do you want the picture to show in your galler?', 'imgslider'); ?></p>
+      <label for="tag-display-order"><?php _e('Display order', 'imgslider'); ?></label>
       <input name="ImgSlider_order" type="text" id="ImgSlider_order" size="10" value="<?php echo $form['ImgSlider_order']; ?>" maxlength="3" />
-      <p>What order should the picture be played in. should it come 1st, 2nd, 3rd, etc.</p>
-      <input name="ImgSlider_id" id="ImgSlider_id" type="hidden" value="<?php echo @$ImgSlider_id_x; ?>">
+      <p><?php _e('What order should the picture be played in. should it come 1st, 2nd, 3rd, etc.', 'imgslider'); ?></p>
       <input type="hidden" name="ImgSlider_form_submit" value="yes"/>
       <p class="submit">
-        <input name="publish" lang="publish" class="button-primary" value="Update Details" type="submit" />
-        <input name="publish" lang="publish" class="button-primary" onclick="ImgSlider_redirect()" value="Cancel" type="button" />
-        <input name="Help" lang="publish" class="button-primary" onclick="ImgSlider_help()" value="Help" type="button" />
+        <input name="publish" lang="publish" class="button-primary" value="<?php _e('Update Details', 'imgslider'); ?>" type="submit" />
+        <input name="publish" lang="publish" class="button-primary" onclick="ImgSlider_redirect()" value="<?php _e('Cancel', 'imgslider'); ?>" type="button" />
+        <input name="Help" lang="publish" class="button-primary" onclick="ImgSlider_help()" value="<?php _e('Help', 'imgslider'); ?>" type="button" />
       </p>
 	  <?php wp_nonce_field('ImgSlider_form_edit'); ?>
     </form>
 </div>
-<p class="description"><?php echo WP_ImgSlider_LINK; ?></p>
+	<p class="description">
+		<?php _e('Check official website for more information', 'imgslider'); ?>
+		<a target="_blank" href="<?php echo WP_ImgSlider_FAV; ?>"><?php _e('click here', 'imgslider'); ?></a>
+	</p>
 </div>
