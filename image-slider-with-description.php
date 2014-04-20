@@ -3,20 +3,19 @@
 Plugin Name: Image slider with description
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Description: Image slider with description WordPress plugin is a Jquery based image slideshow script that incorporates some of your most requested features all rolled into one. Not only image this slideshow have images, title and description. We have option to enable/disable description in the slideshow.
-Author: Gopi.R
-Version: 7.1
-Author URI: http://www.gopiplus.com/work/
+Author: Gopi Ramasamy
+Version: 7.2
+Author URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Donate link: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
+
 global $wpdb, $wp_version;
 define("WP_ImgSlider_TABLE", $wpdb->prefix . "ImgSlider_plugin");
-//define('WP_ImgSlider_UNIQUE_NAME', 'ImgSlider');
-//define('WP_ImgSlider_TITLE', 'Image slider with description');
-//define('WP_ImgSlider_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/">click here</a>');
 define('WP_ImgSlider_FAV', 'http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/');
 
 if ( ! defined( 'WP_ImgSlider_BASENAME' ) )
