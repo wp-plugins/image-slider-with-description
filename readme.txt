@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slide
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
 Requires at least: 3.4
-Tested up to: 3.9
-Stable tag: 7.2
+Tested up to: 4.0
+Stable tag: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -35,14 +35,7 @@ Short code available,
 
 http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 
-See the live demo!	
-
-[Demo](http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/)		
-[To see my more plugin](http://www.gopiplus.com/work/plugin-list/)		
-
 == Installation ==
-
-**Installation Instruction & Configuration**  
 
 [Installation Instruction](http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/)								
 [Configuration](http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/)											
@@ -59,7 +52,6 @@ Q3. Is possible to hide description from the slideshow?
 Q4. Can you explain the short code?
 
 [Answer page](http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/)			
-[Contact](http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/)	
 
 == Screenshots ==
 
@@ -118,6 +110,10 @@ Plugin *.po file (imgslider.po) available in the languages folder. Translators W
 1. Tested up to 3.9
 2. Added little security feature.
 
+= 7.3 =
+
+1. Tested up to 4.0
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -168,3 +164,7 @@ Plugin *.po file (imgslider.po) available in the languages folder. Translators W
 
 1. Tested up to 3.9
 2. Added little security feature.
+
+= 7.3 =
+
+1. Tested up to 4.0
