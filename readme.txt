@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slide
 Plugin URI: http://www.gopiplus.com/work/2011/11/04/wordpress-plugin-image-slider-with-description/
 Tags: Image, slider, slideshow, description
 Requires at least: 3.4
-Tested up to: 4.1
-Stable tag: 7.4
+Tested up to: 4.2.2
+Stable tag: 7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -118,6 +118,10 @@ Plugin *.po file (imgslider.po) available in the languages folder. Translators W
 
 1. Tested up to 4.1
 
+= 7.5 =
+
+1. Tested up to 4.2.2
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -176,3 +180,7 @@ Plugin *.po file (imgslider.po) available in the languages folder. Translators W
 = 7.4 =
 
 1. Tested up to 4.1
+
+= 7.5 =
+
+1. Tested up to 4.2.2
